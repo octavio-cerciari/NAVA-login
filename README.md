@@ -2,6 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
 
+## To test create a .env.example file with the fallow lines in the project folder
+
+connectionstringuri='mongodb://127.0.0.1:27017/mongodb' (Mongo CONNECTION STRING)
+SECRET=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9 (JWT TOKEN SECRET)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
