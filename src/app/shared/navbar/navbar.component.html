@@ -5,6 +5,16 @@
 		alt="Angular Logo" style="cursor: pointer;"
 		src="https://www.nava.com.br/wp-content/uploads/2020/06/nava_topo.svg">
 	<div class="spacer"></div>
-	<button class="submit" (click)="navigationByUrl('/login')">Login</button>
-	<button class="submit" (click)="navigationByUrl('/signup')">Cadastrar</button>
+	<button *ngIf="!user" class="submit" (click)="navigationByUrl('/login')">Login</button>
+	<button *ngIf="!user" class="submit" (click)="navigationByUrl('/signup')">Cadastrar</button>
+
+	<div class="dropdown" *ngIf="user && user?.name">
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  {{user?.name}}
+		</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		  <a class="dropdown-item" (click)="navigationByUrl('/user-config')">Configurações</a>
+		  <a class="dropdown-item" (click)="logout()">Logout</a>
+		</div>
+	  </div>
 </div>

@@ -24,12 +24,7 @@
 		<input type="password"
 			class="pass" [ngClass]="signupForm.controls.password.valid ? 'valid' : 'invalid'"
 			placeholder="senha" formControlName="password">
-		<span class="entypo-key icon" [ngClass]="signupForm.controls.confirmPassword.valid ? 'valid' : 'invalid'">
-			<i class="fa fa-key"></i>
-		</span>
-		<input type="password"
-			class="pass" [ngClass]="signupForm.controls.confirmPassword.valid ? 'valid' : 'invalid'"
-			placeholder="confirmar senha" formControlName="confirmPassword">
+
             <div class="row d-flex justify-content-center">
                 <button class="submit" (click)="onSubmit()" [ngClass]="signupForm.valid ? 'valid' : 'invalid'">
                     <h2 style="color: white;">Cadastrar</h2>

@@ -1,12 +1,17 @@
-.content {
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: scroll;
-    background-size: cover;
-    border-radius: inherit;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.welcome-content { 
+    background-color: #272125;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    align-items: center;
+}
+
+.title {
+    color: white;
+    line-height: 52px;
+    font-size: 50px;
+    font-family: Antwerp!important;
+    text-align: center;
+    justify-content: center;
 }

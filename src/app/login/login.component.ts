@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../core/services/auth-service/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthInterceptor } from '../core/interceptors/auth.interceptor';
+import { LocalStorageService } from '../core/services/local-storage-service/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -9,14 +11,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   
   loginForm = new FormGroup( {
     email: new FormControl( '', [Validators.email, Validators.required] ),
     password: new FormControl( '', [Validators.required, Validators.minLength( 8 )] ),
   } );
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private localStorage: LocalStorageService, private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    if ( this.activatedRoute.snapshot.queryParams['email'] ) { this.loginForm.controls.email.setValue(this.activatedRoute.snapshot.queryParams['email']) }
+  }
 
   onSubmit() {
     if ( this.loginForm.invalid ) return
@@ -26,7 +32,7 @@ export class LoginComponent {
     }
     this.authService.postLogin( login ).subscribe(
       {
-        next: ( n ) => { console.log( n ); this.router.navigateByUrl('/welcome')},
+        next: ( n ) => { console.log( n ); AuthInterceptor.accessToken = n?.token; this.localStorage.set('token', n?.token); this.router.navigateByUrl('/welcome'); },
         error: ( e ) => { console.log( e ); },
       }
     )

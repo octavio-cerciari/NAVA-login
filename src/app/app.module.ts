@@ -10,7 +10,11 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './core/services/user-service/user.service';
 import { AuthService } from './core/services/auth-service/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { LocalStorageService } from './core/services/local-storage-service/local-storage.service';
+import { UserConfigComponent } from './user-config/user-config.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     HomeComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    UserConfigComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [UserService, AuthService],
+  providers: [UserService, AuthService, LocalStorageService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

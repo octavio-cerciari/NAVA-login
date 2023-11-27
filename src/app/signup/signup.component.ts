@@ -11,16 +11,14 @@ import { Router } from '@angular/router';
 export class SignupComponent {
 
   signupForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
   constructor(private userService: UserService, private router: Router ) {}
 
   onSubmit() {
-    console.log(this.signupForm)
     if ( this.signupForm.invalid ) return
     let signup = {
       name: this.signupForm.controls.name.value,
@@ -29,8 +27,8 @@ export class SignupComponent {
     }
     this.userService.postSignup(signup).subscribe(
       {
-        next: ( n ) => { console.log( n ); this.router.navigateByUrl('/login')},
-        error: ( e ) => { console.log( e ); },
+        next: ( n ) => { console.log( n ); this.router.navigateByUrl('/login?email='+this.signupForm.controls.email.value); alert("Usuário registrado com Sucesso!.");},
+        error: ( e ) => { console.log( e ); alert(e.error?.error);},
       }
     )
   }

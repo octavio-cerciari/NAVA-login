@@ -1,3 +1,6 @@
-<div class="content" style="overflow-x: hidden; display: contents;">
-    <img src=".../../../../assets/images/solucoes_header-scaled.jpg" style="width: 100%" alt="">
+<div class="welcome-content" style="display: flex; justify-content: center; align-items: center;">
+    <div class="d-flex" style="flex-direction: column;">
+        <label class="title">Bem Vindo a NAVA!</label>
+        <label *ngIf="user && user?.name" class="title">{{user?.name}}</label>
+    </div>
 </div>

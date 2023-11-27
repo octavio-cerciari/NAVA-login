@@ -5,6 +5,7 @@ const schema = mongoose.Schema({
     name: 'String',
     email: 'String',
     password: 'String',
+    session: 'String',
 }, {timestamps:true})
 
 const Post = mongoose.model('User',schema);

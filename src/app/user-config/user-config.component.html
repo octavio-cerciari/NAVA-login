@@ -1,0 +1,32 @@
+<div class="user-config-content">
+	<form [formGroup]="userForm">
+		<h2>
+			<span class="entypo-login">
+				<i class="fa fa-sign-in"></i>
+			</span>
+			Editar Usuário
+		</h2>
+		<span class="entypo-user inputNomeIcon" [ngClass]="userForm.controls.name.valid ? 'valid' : 'invalid'">
+			<i class="fa fa-user"></i>
+		</span>
+		<input type="text"
+			class="user" [ngClass]="userForm.controls.name.valid ? 'valid' : 'invalid'"
+			placeholder="nome" formControlName="name">
+		<span class="entypo-user icon" [ngClass]="userForm.controls.email.valid ? 'valid' : 'invalid'">
+			<i class="fa fa-user"></i>
+		</span>
+		<input type="text"
+			class="user" [ngClass]="userForm.controls.email.valid ? 'valid' : 'invalid'"
+			placeholder="email" formControlName="email">
+            <div class="row d-flex justify-content-center">
+                <button class="submit" (click)="onSubmit()" [ngClass]="userForm.valid ? 'valid' : 'invalid'">
+                    <h2 style="color: white;">Editar</h2>
+                </button>
+            </div>
+			<div class="row d-flex justify-content-center">
+                <button class="submit invalid" (click)="deleteAccount()">
+                    <h2 style="color: white;">Apagar Conta</h2>
+                </button>
+            </div>
+	</form>
+</div>

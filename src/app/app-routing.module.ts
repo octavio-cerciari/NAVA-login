@@ -4,7 +4,9 @@ import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { AuthGuard } from './core/guard/user-guard';
+import { AuthGuardService } from './core/guard/user-guard';
+import { UserConfigComponent } from './user-config/user-config.component';
+import { VisitorGuardService } from './core/guard/visitor-guard';
 
 const routes: Routes = [
   {
@@ -13,16 +15,28 @@ const routes: Routes = [
   },
   {
     path: 'signup',
-    component: SignupComponent
+    component: SignupComponent,
+    canActivate: [VisitorGuardService]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [VisitorGuardService]
+  },
+  {
+    path: 'login/:email',
+    component: LoginComponent,
+    canActivate: [VisitorGuardService]
   },
   {
     path: 'welcome',
     component: WelcomeComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'user-config',
+    component: UserConfigComponent,
+    canActivate: [AuthGuardService]
   },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

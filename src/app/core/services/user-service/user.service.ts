@@ -18,9 +18,17 @@ export class UserService {
     return this.http.post<any>( `${this.URL}/user`, user );
   }
 
+  putUser( user: any ): Observable<any> {
+    return this.http.put<any>( `${this.URL}/user/`+ user.id, user );
+  }
+
+  deleteUser( ): Observable<any> {
+    return this.http.delete<any>( `${this.URL}/user`);
+  }
+
   getUser(): Observable<any> {
-    return this.http.get<any>( `${this.URL}/api/user` ).pipe(
-      tap( response => { this.user = response.dados; this.userSubject.next( response.dados ); } )
+    return this.http.get<any>( `${this.URL}/user` ).pipe(
+      tap( response => { console.log(response); this.user = response; this.userSubject.next( response ); } )
     )
   }
 }
