@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      imagePullSecrets: 
+      -  name: dockercreds
+      containers:
+      - name: myapp
+        image: changan1111/newdocker:latest
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "500m"
+            ephemeral-storage: "2Gi"
+          requests:
+            ephemeral-storage: "1Gi"
+            cpu: "500m"
+            memory: "1Gi"           
+        ports:
+        - containerPort: 3000
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  selector:
+    app: myapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+    nodePort: 31110
+  type: LoadBalancer
+
+       
